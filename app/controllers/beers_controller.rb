@@ -13,15 +13,16 @@ class BeersController < ApplicationController
   # POST /beers/get_barcode
   def get_barcode
     upc = JSON.parse(params[:upc])
+    beer = Beer.create
+    render json: beer
+    # binding.pry
+    # @beer = Beer.find_or_initialize_by(upc)
 
-    binding.pry
-    @beer = Beer.find_or_initialize_by(upc)
-
-    unless @beer.new_record?
-      redirect_to @beer
-    else
-      redirect_to new_product_path(upc)
-    end
+    # unless @beer.new_record?
+    #   redirect_to @beer
+    # else
+    #   redirect_to new_product_path(upc)
+    # end
   end
 
   def new

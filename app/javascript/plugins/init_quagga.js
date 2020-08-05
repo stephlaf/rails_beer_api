@@ -109,6 +109,8 @@ function initQuagga(){
         credentials: 'same-origin',
         body: JSON.stringify({ upc: lastCode })
       })
+        .then(response => response.json())
+        .then(data => console.log(data))
       
       // $.ajax({
       //   type: "POST",
