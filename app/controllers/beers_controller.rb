@@ -5,24 +5,28 @@ class BeersController < ApplicationController
   end
 
   def show
+    @beer = Beer.find(params[:id])
   end
 
-  # def new
-  # end
+  def new
+  end
   
   # POST /beers/get_barcode
   def get_barcode
-    upc = JSON.parse(params[:upc])
-    beer = Beer.create
-    render json: beer
-    # binding.pry
-    # @beer = Beer.find_or_initialize_by(upc)
+    @upc = params[:upc]
 
-    # unless @beer.new_record?
-    #   redirect_to @beer
-    # else
-    #   redirect_to new_product_path(upc)
-    # end
+    @beer = Beer.find_or_initialize_by(upc: @upc)
+
+    # binding.pry
+
+    unless @beer.new_record?
+      redirect_to beer_path(@beer)
+    else
+      redirect_to new_beer_path(@upc)
+      # render :new
+    end
+
+    # render json: @beer
   end
 
   def new

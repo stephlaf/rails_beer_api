@@ -121,9 +121,6 @@ function initQuagga(){
 
   }
 };
-// $(document).on('turbolinks:load', load_quagga);
-
-
 
 export { initQuagga };
 
