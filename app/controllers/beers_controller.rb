@@ -19,14 +19,15 @@ class BeersController < ApplicationController
 
     # binding.pry
 
-    unless @beer.new_record?
-      redirect_to beer_path(@beer)
-    else
-      redirect_to new_beer_path(@upc)
-      # render :new
-    end
+    # unless @beer.new_record?
+    #   # redirect_to beer_path(@beer)
+    #   render json: @beer
+    # else
+    #   redirect_to new_beer_path(@upc)
+    #   # render :new
+    # end
 
-    # render json: @beer
+    render json: @beer
   end
 
   def new

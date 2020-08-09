@@ -1,6 +1,24 @@
 import * as ScanditSDK from "scandit-sdk";
 
 const key = '';
+const results = document.getElementById('results');
+
+const displayData = (data) => {
+  console.log(data);
+  const beer = `<div>
+    <li>Name: ${data.name}</li>
+    <li>Short desc: ${data.short_desc}</li>
+    <li>Long desc: ${data.long_desc}</li>
+    <li>Alcool %: ${data.alc_percent}</li>
+    <li>UPC: ${data.upc}</li>
+    <img src=${data.image_link} height='120' />
+  </div>`;
+  results.insertAdjacentHTML('afterbegin', beer);
+};
+
+const displayNewBeerForm = (data) => {
+  console.log(data);
+};
 
 const callController = (scanResult) => {
   const code = scanResult.barcodes[0].data;
@@ -18,8 +36,16 @@ const callController = (scanResult) => {
     credentials: 'same-origin',
     body: JSON.stringify({ upc: code })
   })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
+    .then(response => response.json())
+    // .then(displayData)
+    
+    .then((data) => {
+      if (data.id) {
+        displayData(data);
+      } else {
+        displayNewBeerForm(data);
+      }
+    });
 };
 
 const scanditTest = () => {
