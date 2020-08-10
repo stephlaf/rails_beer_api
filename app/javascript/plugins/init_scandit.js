@@ -1,25 +1,24 @@
 import * as ScanditSDK from "scandit-sdk";
 
-const key = '';
 const results = document.getElementById('results');
 
-const displayData = (data) => {
-  console.log(data);
+// const displayData = (data) => {
+//   console.log(data);
 
-  const beer = `<div>
-    <li>Name: ${data.name}</li>
-    <li>Short desc: ${data.short_desc}</li>
-    <li>Long desc: ${data.long_desc}</li>
-    <li>Alcool %: ${data.alc_percent}</li>
-    <li>UPC: ${data.upc}</li>
-    <li></li>
-  </div>`;
-  results.insertAdjacentHTML('afterbegin', beer);
-};
+//   const beer = `<div>
+//     <li>Name: ${data.name}</li>
+//     <li>Short desc: ${data.short_desc}</li>
+//     <li>Long desc: ${data.long_desc}</li>
+//     <li>Alcool %: ${data.alc_percent}</li>
+//     <li>UPC: ${data.upc}</li>
+//     <li></li>
+//   </div>`;
+//   results.insertAdjacentHTML('afterbegin', beer);
+// };
 
-const displayNewBeerForm = (data) => {
-  console.log(data);
-};
+// const displayNewBeerForm = (data) => {
+//   console.log(data);
+// };
 
 const callController = (scanResult) => {
   const code = scanResult.barcodes[0].data;
@@ -51,9 +50,10 @@ const callController = (scanResult) => {
 
 const scanditTest = () => {
   const barcodeElement = document.getElementById("scandit-barcode-picker");
+  // console.log(barcodeElement.dataset.scanditkey);
 
   if (barcodeElement) {
-    ScanditSDK.configure(key, {
+    ScanditSDK.configure(barcodeElement.dataset.scanditkey, {
       engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk/build",
     })
 

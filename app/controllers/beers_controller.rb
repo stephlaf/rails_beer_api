@@ -39,20 +39,8 @@ class BeersController < ApplicationController
   # POST /beers/get_barcode
   def get_barcode
     @upc = params[:upc]
-
     @beer = Beer.find_or_initialize_by(upc: @upc)
     render json: @beer
-
-    # binding.pry
-
-    # unless @beer.new_record?
-    #   # redirect_to beer_path(@beer)
-    # else
-    #   # redirect_to new_beer_path(@upc)
-    #   render :new
-    # end
-
-    # render json: @beer
   end
 
   private
