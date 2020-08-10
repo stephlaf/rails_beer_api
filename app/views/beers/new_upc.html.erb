@@ -1,0 +1,17 @@
+<div class="container text-center d-flex flex-column align-items-center">
+  <h1>Beers#new_upc</h1>
+  <p>Find me in app/views/beers/new.html.erb</p>
+  <div class="my-container">
+    <%= simple_form_for(@beer) do |f| %>
+
+      <%= f.input :name %>
+      <%= f.input :alc_percent %>
+      <%= f.input :short_desc %>
+      <%= f.input :long_desc %>
+      <%= f.input :photo, as: :file %>
+      <%= f.input :upc, value: params[:upc] %>
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

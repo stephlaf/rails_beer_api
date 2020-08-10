@@ -6,4 +6,5 @@ class Beer < ActiveRecord::Base
   #   @short_desc = att[:short_desc]
   #   @long_desc = att[:long_desc]
   # end
+  has_one_attached :photo
 end

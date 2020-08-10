@@ -7,35 +7,24 @@ class BeersController < ApplicationController
   def show
     @beer = Beer.find(params[:id])
   end
-
-  def new
-  end
   
-  # POST /beers/get_barcode
-  def get_barcode
-    @upc = params[:upc]
-
-    @beer = Beer.find_or_initialize_by(upc: @upc)
-
-    # binding.pry
-
-    # unless @beer.new_record?
-    #   # redirect_to beer_path(@beer)
-    #   render json: @beer
-    # else
-    #   redirect_to new_beer_path(@upc)
-    #   # render :new
-    # end
-
-    render json: @beer
+  def new_upc
+    @beer = Beer.new(upc: params[:upc])
   end
 
   def new
-    @beer = Beer.new
+    @beer = Beer.new(upc: params[:upc])
     # @beer.upc = params[:upc]
   end
 
   def create
+    @beer = Beer.new(beer_params)
+
+    if @beer.save
+      redirect_to beer_path(@beer)
+    else
+      render :new_upc
+    end
   end
 
   def edit
@@ -45,6 +34,31 @@ class BeersController < ApplicationController
   end
 
   def destroy
+  end
+
+  # POST /beers/get_barcode
+  def get_barcode
+    @upc = params[:upc]
+
+    @beer = Beer.find_or_initialize_by(upc: @upc)
+    render json: @beer
+
+    # binding.pry
+
+    # unless @beer.new_record?
+    #   # redirect_to beer_path(@beer)
+    # else
+    #   # redirect_to new_beer_path(@upc)
+    #   render :new
+    # end
+
+    # render json: @beer
+  end
+
+  private
+
+  def beer_params
+    params.require(:beer).permit(:name, :alc_percent, :short_desc, :long_desc, :photo, :upc)
   end
 end
 

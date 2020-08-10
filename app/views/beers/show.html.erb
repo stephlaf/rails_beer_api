@@ -1,6 +1,14 @@
-<h1>Beers#show</h1>
-<p>Find me in app/views/beers/show.html.erb</p>
+<div class="container text-center">
+  <h1>Beers#show</h1>
 
-<%= @beer.attributes.each do |att| %>
-  <li><%= att.last %></li>
-<% end %>
+  <ul>
+    <li>Name: <%= @beer.name %></li>
+    <li>Alcool percentage: <%= @beer.alc_percent %>%</li>
+    <li><%= @beer.short_desc %></li>
+    <li><%= @beer.long_desc %></li>
+    <li>UPC: <%= @beer.upc %></li>
+    <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
+  </ul>
+
+  <%= link_to 'Scan another one!', root_path, class: 'btn btn-secondary' %>
+</div>

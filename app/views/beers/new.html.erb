@@ -1,2 +1,16 @@
 <h1>Beers#new</h1>
 <p>Find me in app/views/beers/new.html.erb</p>
+
+<%= form_for(@beer) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :alc_percent %>
+  <%= f.text_field :alc_percent %>
+  <%= f.label :short_desc %>
+  <%= f.text_field :short_desc %>
+  <%= f.label :long_desc %>
+  <%= f.text_field :long_desc %>
+  <%= f.label :photo %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>

@@ -5,13 +5,14 @@ const results = document.getElementById('results');
 
 const displayData = (data) => {
   console.log(data);
+
   const beer = `<div>
     <li>Name: ${data.name}</li>
     <li>Short desc: ${data.short_desc}</li>
     <li>Long desc: ${data.long_desc}</li>
     <li>Alcool %: ${data.alc_percent}</li>
     <li>UPC: ${data.upc}</li>
-    <img src=${data.image_link} height='120' />
+    <li></li>
   </div>`;
   results.insertAdjacentHTML('afterbegin', beer);
 };
@@ -37,51 +38,57 @@ const callController = (scanResult) => {
     body: JSON.stringify({ upc: code })
   })
     .then(response => response.json())
-    // .then(displayData)
-    
     .then((data) => {
       if (data.id) {
-        displayData(data);
+        // displayData(data);
+        window.location.assign(`http://localhost:3000/beers/${data.id}`)
       } else {
-        displayNewBeerForm(data);
+        // displayNewBeerForm(data);
+        window.location.assign(`http://localhost:3000/beers/new/${data.upc}`)
       }
     });
 };
 
 const scanditTest = () => {
-  ScanditSDK.configure(key, {
-    engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk/build",
-  })
+  const barcodeElement = document.getElementById("scandit-barcode-picker");
 
-    .then(() => {
-      
-      ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
-        playSoundOnScan: true,
-        // vibrateOnScan: true,
-      })
+  if (barcodeElement) {
+    ScanditSDK.configure(key, {
+      engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk/build",
+    })
 
-      .then(function (barcodePicker) {
-      
-        var scanSettings = new ScanditSDK.ScanSettings({
-          enabledSymbologies: ["ean8", "ean13", "upca", "upce", "code128", "code39", "code93", "itf"],
-          codeDuplicateFilter: 1000
-        });
-
-        barcodePicker.applyScanSettings(scanSettings);
-
-        barcodePicker.on("scan", function (scanResult) {
-          callController(scanResult);
-          barcodePicker.destroy();
+      .then(() => {
+        
+        // ScanditSDK.BarcodePicker.create(barcodeElement), {
+        ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
+          playSoundOnScan: true,
+          // vibrateOnScan: true,
         })
 
-        // alert(
-        //   scanResult.barcodes.reduce(function (string, barcode) {
-        //     return string + ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data + "\n";
-        //   }, "")
-        // );
+        .then(function (barcodePicker) {
+        
+          var scanSettings = new ScanditSDK.ScanSettings({
+            enabledSymbologies: ["ean8", "ean13", "upca", "upce", "code128", "code39", "code93", "itf"],
+            codeDuplicateFilter: 1000
+          });
 
-      })
-    });
+          barcodePicker.applyScanSettings(scanSettings);
+
+          barcodePicker.on("scan", function (scanResult) {
+            callController(scanResult);
+            barcodePicker.destroy();
+          })
+
+          // alert(
+          //   scanResult.barcodes.reduce(function (string, barcode) {
+          //     return string + ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data + "\n";
+          //   }, "")
+          // );
+
+        })
+      });
+  // if closing
+  }
 
 };
 

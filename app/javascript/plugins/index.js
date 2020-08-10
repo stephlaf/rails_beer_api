@@ -4,4 +4,6 @@ import { scanditTest } from './init_scandit';
 
 // initQuagga();
 // initializeZxing();
-scanditTest();
+document.addEventListener('turbolinks:load', () => {
+  scanditTest();
+});
