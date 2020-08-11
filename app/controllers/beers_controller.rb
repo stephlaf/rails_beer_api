@@ -1,4 +1,4 @@
-require 'pry-byebug'
+# require 'pry-byebug'
 
 class BeersController < ApplicationController
   def index
