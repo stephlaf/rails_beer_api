@@ -2,6 +2,7 @@ require 'pry-byebug'
 
 class BeersController < ApplicationController
   def index
+    @beers = Beer.all
   end
 
   def show
@@ -34,6 +35,9 @@ class BeersController < ApplicationController
   end
 
   def destroy
+  end
+
+  def scan
   end
 
   # POST /beers/get_barcode

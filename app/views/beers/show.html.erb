@@ -7,8 +7,11 @@
     <li><%= @beer.short_desc %></li>
     <li><%= @beer.long_desc %></li>
     <li>UPC: <%= @beer.upc %></li>
-    <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
+    <% if @beer.photo.attached? %>
+      <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
+    <% end %>
   </ul>
 
-  <%= link_to 'Scan another one!', root_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Scan another one!', scan_beers_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Back to all beers', root_path, class: 'btn btn-secondary' %>
 </div>

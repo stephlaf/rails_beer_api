@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   resources :beers do
     post :get_barcode, on: :collection
+    get :scan, on: :collection
   end
 end
