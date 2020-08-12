@@ -22,15 +22,20 @@ const results = document.getElementById('results');
 
 const callController = (scanResult) => {
   const code = scanResult.barcodes[0].data;
-
   const csrfToken = document.querySelector("[name='csrf-token']").content;
-    // if (Window.location === 'http://localhost:3000/') {
-    //   const url = 'http://localhost:3000/beers/get_barcode';
-    // } else if (Window.location === 'https://hopscan.herokuapp.com/') {
-    //   const url = 'https://hopscan.herokuapp.com/beers/get_barcode';
-    // }
-  // fetch('http://localhost:3000/beers/get_barcode',{
-  fetch('https://hopscan.herokuapp.com/beers/get_barcode',{
+
+  const url = window.location.href;
+  const localhostRegex = /localhost/;
+  const herokuRegex = /hopscan/;
+  let fetchUrl;
+
+  if (localhostRegex.test(url)) {
+    fetchUrl = 'http://localhost:3000/beers/get_barcode';
+  } else if (herokuRegex.test(url)) {
+    fetchUrl = 'https://hopscan.herokuapp.com/beers/get_barcode';
+  }
+  
+  fetch(fetchUrl,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,19 +49,23 @@ const callController = (scanResult) => {
     .then(response => response.json())
     .then((data) => {
       if (data.id) {
-        // displayData(data);
-        window.location.assign(`https://hopscan.herokuapp.com/beers/${data.id}`)
-        // window.location.assign(`http://localhost:3000/beers/${data.id}`)
+        if (localhostRegex.test(url)) {
+          window.location.assign(`http://localhost:3000/beers/${data.id}`)
+        } else if (herokuRegex.test(url)) {
+          window.location.assign(`https://hopscan.herokuapp.com/beers/${data.id}`)
+        }
       } else {
-        // displayNewBeerForm(data);
-        window.location.assign(`https://hopscan.herokuapp.com/beers/new/${data.upc}`)
+        if (localhostRegex.test(url)) {
+          window.location.assign(`http://localhost:3000/beers/new/${data.upc}`)
+        } else if (herokuRegex.test(url)) {
+          window.location.assign(`https://hopscan.herokuapp.com/beers/new/${data.upc}`)
+        }
       }
     });
 };
 
 const scanditTest = () => {
   const barcodeElement = document.getElementById("scandit-barcode-picker");
-  // console.log(barcodeElement.dataset.scanditkey);
 
   if (barcodeElement) {
     ScanditSDK.configure(barcodeElement.dataset.scanditkey, {
