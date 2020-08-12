@@ -24,9 +24,13 @@ const callController = (scanResult) => {
   const code = scanResult.barcodes[0].data;
 
   const csrfToken = document.querySelector("[name='csrf-token']").content;
-
+    if (Window.location === 'http://localhost:3000/') {
+      const url = 'http://localhost:3000/beers/get_barcode';
+    } else if (Window.location === 'https://hopscan.herokuapp.com/') {
+      const url = 'https://hopscan.herokuapp.com/beers/get_barcode';
+    }
   // fetch('http://localhost:3000/beers/get_barcode',{
-  fetch('https://hopscan.herokuapp.com/beers/get_barcode',{
+  fetch(url,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,10 +45,11 @@ const callController = (scanResult) => {
     .then((data) => {
       if (data.id) {
         // displayData(data);
-        window.location.assign(`http://localhost:3000/beers/${data.id}`)
+        window.location.assign(`https://hopscan.herokuapp.com/beers/${data.id}`)
+        // window.location.assign(`http://localhost:3000/beers/${data.id}`)
       } else {
         // displayNewBeerForm(data);
-        window.location.assign(`http://localhost:3000/beers/new/${data.upc}`)
+        window.location.assign(`https://hopscan.herokuapp.com/beers/new/${data.upc}`)
       }
     });
 };
