@@ -24,13 +24,13 @@ const callController = (scanResult) => {
   const code = scanResult.barcodes[0].data;
 
   const csrfToken = document.querySelector("[name='csrf-token']").content;
-    if (Window.location === 'http://localhost:3000/') {
-      const url = 'http://localhost:3000/beers/get_barcode';
-    } else if (Window.location === 'https://hopscan.herokuapp.com/') {
-      const url = 'https://hopscan.herokuapp.com/beers/get_barcode';
-    }
+    // if (Window.location === 'http://localhost:3000/') {
+    //   const url = 'http://localhost:3000/beers/get_barcode';
+    // } else if (Window.location === 'https://hopscan.herokuapp.com/') {
+    //   const url = 'https://hopscan.herokuapp.com/beers/get_barcode';
+    // }
   // fetch('http://localhost:3000/beers/get_barcode',{
-  fetch(url,{
+  fetch('https://hopscan.herokuapp.com/beers/get_barcode',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
