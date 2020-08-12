@@ -25,7 +25,8 @@ const callController = (scanResult) => {
 
   const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-  fetch('http://localhost:3000/beers/get_barcode',{
+  // fetch('http://localhost:3000/beers/get_barcode',{
+  fetch('https://hopscan.herokuapp.com/beers/get_barcode',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
