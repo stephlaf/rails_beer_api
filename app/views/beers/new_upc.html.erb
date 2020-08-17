@@ -5,6 +5,7 @@
     <%= simple_form_for(@beer) do |f| %>
 
       <%= f.input :name %>
+      <%= f.input :brewery, collection: @breweries %>
       <%= f.input :alc_percent %>
       <%= f.input :short_desc %>
       <%= f.input :long_desc %>

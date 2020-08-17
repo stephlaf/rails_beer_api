@@ -10,6 +10,7 @@ class BeersController < ApplicationController
   end
   
   def new_upc
+    @breweries = Brewery.all
     @beer = Beer.new(upc: params[:upc])
   end
 
@@ -19,7 +20,17 @@ class BeersController < ApplicationController
   end
 
   def create
-    @beer = Beer.new(beer_params)
+    @brewery = Brewery.find_by(name: params[:beer][:brewery])
+
+    if @brewery.nil?
+      @brewery = Brewery.create!(name: params[:beer][:brewery])
+    end
+
+    params_hash = beer_params
+    params_hash.delete(:brewery)
+
+    @beer = Beer.new(params_hash)
+    @beer.brewery = @brewery
 
     if @beer.save
       redirect_to beer_path(@beer)
@@ -50,7 +61,7 @@ class BeersController < ApplicationController
   private
 
   def beer_params
-    params.require(:beer).permit(:name, :alc_percent, :short_desc, :long_desc, :photo, :upc)
+    params.require(:beer).permit(:name, :brewery, :alc_percent, :short_desc, :long_desc, :photo, :upc)
   end
 end
 
