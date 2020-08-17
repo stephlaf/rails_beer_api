@@ -1,6 +1,12 @@
 require 'open-uri'
 require 'nokogiri'
 
+puts "Destroying all breweries..."
+Brewery.destroy_all
+
+puts "Creating breweries..."
+brewery = Brewery.create!(name: 'Dieu du Ciel!')
+
 url = "https://dieuduciel.com/categories/en-bouteille/"
 html = open(url).read
 doc = Nokogiri::HTML(html)
@@ -40,6 +46,9 @@ beers = links.first(5).map do |link|
   
   beer = Beer.new(att)
   beer.photo.attach(io: photo_file, filename: "#{name}", content_type: 'image/jpg')
+
+  beer.brewery = brewery
+
   beer.save!
 
   p counter += 1
