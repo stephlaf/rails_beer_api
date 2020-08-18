@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  
   root to: 'beers#index'
 
   get 'beers/new/:upc', to: 'beers#new_upc', as: 'new_upc'

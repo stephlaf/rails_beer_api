@@ -1,6 +1,8 @@
 # require 'pry-byebug'
 
 class BeersController < ApplicationController
+  # skip_before_action :authenticate_user!, only: :home
+  
   def index
     @beers = Beer.all
   end
