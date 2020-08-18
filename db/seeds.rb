@@ -40,9 +40,9 @@ end
 puts "Creating beers..."
 
 counter = 0
-upcs = %w[4902125189003 0011391001897 0011391001835 14214267-000499 0060383857974]
+upcs = %w[4902125189003 0011391001897 0011391001835 14214267-000499 0060383857974 7630054475702 7630054474606]
 
-beers = links.first(5).map do |link|
+beers = links.first(7).map do |link|
   html = open(link).read
   doc = Nokogiri::HTML(html)
   

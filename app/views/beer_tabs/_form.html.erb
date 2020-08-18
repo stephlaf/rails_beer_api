@@ -1,4 +1,9 @@
 <%= simple_form_for([@beer, @beer_tab]) do |f| %>
-    <%= f.input :rating, collection: (0..5).to_a %>
+    <%= f.input :rating,
+      label: false,
+      collection: (0..5).to_a,
+      input_html: { class: 'select2' },
+      include_hidden: false
+    %>
     <%= f.submit %>
 <% end %>

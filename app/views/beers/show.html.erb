@@ -10,9 +10,7 @@
       <% else %>
         <% @beer.beer_tabs.first(1).each do |beer_tab| %>
           <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 30 %> 
-          <%= link_to edit_beer_beer_tab_path(@beer, beer_tab) do %>
-            <i class="far fa-edit"></i>
-          <% end %>
+          <%= link_to 'Change the rating', edit_beer_beer_tab_path(@beer, beer_tab) %>
           <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
         <% end %>
       <% end %>
