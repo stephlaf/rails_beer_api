@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :beers do
     post :get_barcode, on: :collection
     get :scan, on: :collection
+    resources :beer_tabs, only: [:new, :create, :edit, :update]
   end
+
+  resources :beer_tabs, only: [:index, :show, :destroy]
 
   resources :breweries, only: [:index, :show, :new, :create]
 end

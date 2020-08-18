@@ -4,10 +4,25 @@
   <h3><%= link_to 'Scan a beer!', scan_beers_path  %></h3>
   
   <div class="row">
-    <% @beers.order(id: :asc).each do |beer| %>
+    <%# @beers.order(id: :asc).each do |beer| %>
+    <% @beers.order_by_name.each do |beer| %>
       <div class="col-12">
         <div class="beer-card m-3 p-3">
           <h4><%= beer.name %></h4>
+
+          <% if  current_user %>
+            <% if beer.beer_tabs.empty? %>
+              <%= link_to new_beer_beer_tab_path(beer) do  %>
+                <%= image_tag "mug_full.svg", alt: "Full pint", width: 30 %>
+              <% end %>
+            <% else %>
+              <% beer.beer_tabs.first(1).each do |beer_tab| %>
+                <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 20 %>      
+                <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+              <% end %>
+            <% end %>
+          <% end %>
+
           <%= link_to beer_path(beer) do  %>
             <% if beer.photo.attached? %>
               <div><%= cl_image_tag beer.photo.key, height: 150, crop: :thumb %></div>

@@ -1,0 +1,9 @@
+<div class="container text-center">
+  <h1>BeerTabs#edit</h1>
+  <p>Find me in app/views/beer_tabs/edit.html.erb</p>
+
+  <h3><%= @beer.name %></h3>
+  <%= cl_image_tag @beer.photo.key, alt: @beer.name, width: 150 %>
+
+  <%= render 'form' %>
+</div>

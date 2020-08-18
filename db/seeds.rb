@@ -1,11 +1,28 @@
 require 'open-uri'
 require 'nokogiri'
 
+puts "Destroying all users"
+User.destroy_all
+
+puts "Creating users..."
+
+names = %w[a b c d e]
+user_counter = 0
+
+5.times do
+  User.create!(email: "#{names[user_counter]}@#{names[user_counter]}.#{names[user_counter]}", password: '123456')
+  user_counter += 1
+end
+
+# ________________________________________
+
 puts "Destroying all breweries..."
 Brewery.destroy_all
 
 puts "Creating breweries..."
 brewery = Brewery.create!(name: 'Dieu du Ciel!')
+
+# ________________________________________
 
 url = "https://dieuduciel.com/categories/en-bouteille/"
 html = open(url).read

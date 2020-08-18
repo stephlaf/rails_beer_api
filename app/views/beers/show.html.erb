@@ -1,16 +1,36 @@
 <div class="container text-center">
   <h1>Beers#show</h1>
 
-  <ul>
-    <li>Name: <%= @beer.name %></li>
-    <li>Alcool percentage: <%= @beer.alc_percent %>%</li>
-    <li><%= @beer.short_desc %></li>
-    <li><%= @beer.long_desc %></li>
-    <li>UPC: <%= @beer.upc %></li>
-    <% if @beer.photo.attached? %>
-      <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
+  <div class="my-3">
+    <% if  current_user %>
+      <% if @beer.beer_tabs.empty? %>
+        <%= link_to new_beer_beer_tab_path(@beer) do  %>  
+          <%= image_tag "mug_full.svg", alt: "Full pint", width: 30 %>
+        <% end %>
+      <% else %>
+        <% @beer.beer_tabs.first(1).each do |beer_tab| %>
+          <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 30 %> 
+          <%= link_to edit_beer_beer_tab_path(@beer, beer_tab) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+        <% end %>
+      <% end %>
     <% end %>
-  </ul>
+  </div>
+
+  <div class="my-3">
+    <ul>
+      <li>Name: <%= @beer.name %></li>
+      <li>Alcool percentage: <%= @beer.alc_percent %></li>
+      <li><%= @beer.short_desc %></li>
+      <li><%= @beer.long_desc %></li>
+      <li>UPC: <%= @beer.upc %></li>
+      <% if @beer.photo.attached? %>
+        <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
+      <% end %>
+    </ul>
+  </div>
 
   <%= link_to 'Scan another one!', scan_beers_path, class: 'btn btn-secondary' %>
   <%= link_to 'Back to all beers', root_path, class: 'btn btn-secondary' %>

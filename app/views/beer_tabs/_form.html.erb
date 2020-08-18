@@ -1,0 +1,4 @@
+<%= simple_form_for([@beer, @beer_tab]) do |f| %>
+    <%= f.input :rating, collection: (0..5).to_a %>
+    <%= f.submit %>
+<% end %>

@@ -1,0 +1,13 @@
+<h1>BeerTabs#show</h1>
+<%= link_to 'Back to all beers', root_path, class: 'btn btn-secondary' %>
+<p>Find me in app/views/beer_tabs/show.html.erb</p>
+
+<p>
+  <%= link_to @beer_tab.beer.name, beer_path(@beer_tab.beer) %>
+</p>
+<p>
+  Tried: <%= @beer_tab.tried ? 'yes' : 'not yet' %>
+</p>
+<p>
+  Rating: <%= @beer_tab.rating %>
+</p>
