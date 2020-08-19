@@ -5,7 +5,11 @@
     <%= simple_form_for(@beer) do |f| %>
 
       <%= f.input :name %>
-      <%= f.input :brewery, collection: @breweries, input_html: { class: 'select2' }, label: false %>
+      <%= f.input :brewery,
+        collection: @breweries,
+        input_html: { class: 'select2-breweries' },
+        label: false
+      %>
       <%= f.input :alc_percent %>
       <%= f.input :short_desc %>
       <%= f.input :long_desc %>
