@@ -19,11 +19,11 @@
 
   <div class="my-3">
     <ul>
-      <li>Name: <%= @beer.name %></li>
-      <li>Alcool percentage: <%= @beer.alc_percent %></li>
+      <li><%= @beer.name %></li>
+      <li>% d'Alcool: <%= @beer.alc_percent %></li>
       <li><%= @beer.short_desc %></li>
       <li><%= @beer.long_desc %></li>
-      <li>UPC: <%= @beer.upc %></li>
+      <!-- <li>UPC: <%#= @beer.upc %></li> -->
       <% if @beer.photo.attached? %>
         <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
       <% end %>
