@@ -25,7 +25,7 @@
 
           <%= link_to beer_path(beer) do  %>
             <% if beer.photo.attached? %>
-              <div><%= cl_image_tag beer.photo.key, height: 150, crop: :thumb %></div>
+              <div class="my-3"><%= cl_image_tag beer.photo.key, height: 150, crop: :thumb %></div>
             <% end %>
           <% end %>
         </div>

@@ -1,5 +1,9 @@
 require 'open-uri'
 require 'nokogiri'
+require 'csv'
+
+# ______________________________________
+# USERS
 
 puts "Destroying all users"
 User.destroy_all
@@ -15,14 +19,34 @@ user_counter = 0
 end
 
 # ________________________________________
+# BREWERIES
 
 puts "Destroying all breweries..."
 Brewery.destroy_all
 
-puts "Creating breweries..."
-brewery = Brewery.create!(name: 'Dieu du Ciel!')
+# Gettings names from CSV
+csv_options = { col_sep: ',', headers: :first_row, header_converters: :symbol }
+
+filepath = File.join(__dir__, 'amq.csv')
+
+amq_names = []
+CSV.foreach(filepath, csv_options) do |row|
+  amq_names << row[:name].titleize.gsub(/\s{2,}/, ' ').gsub("L'", "l'").gsub('à', 'À')
+end
+
+clean_amq_names = amq_names.uniq
+
+puts "Creating breweries from AMQ list..."
+
+clean_amq_names.each do |name|
+  Brewery.create!(name: name)
+end
+
+# pp Brewery.all
+
 
 # ________________________________________
+# BEERS Dieu du Ciel!
 
 url = "https://dieuduciel.com/categories/en-bouteille/"
 html = open(url).read
@@ -41,6 +65,8 @@ puts "Creating beers..."
 
 counter = 0
 upcs = %w[4902125189003 0011391001897 0011391001835 14214267-000499 0060383857974 7630054475702 7630054474606]
+
+brewery = Brewery.find_by(name: 'Dieu Du Ciel!')
 
 beers = links.first(7).map do |link|
   html = open(link).read
@@ -71,5 +97,5 @@ beers = links.first(7).map do |link|
   p counter += 1
 end
 
-pp Beer.all
+# pp Beer.all
 # SKU 1339107 Genese
