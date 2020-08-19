@@ -1,12 +1,20 @@
 <div class="container text-center d-flex flex-column align-items-center">
-  <h1>All Beers</h1>
+  <h1>All <%= @beers.count %> Beers</h1>
+
+  <%= form_tag beers_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "",
+      placeholder: "🔎"
+    %>
+    <%= submit_tag "Search", class: "btn btn-secondary btn-sm" %>
+  <% end %>
 
   <%= link_to scan_beers_path do %>
     <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 35 %>
   <% end %>
   
   <div class="row">
-    <%# @beers.order(id: :asc).each do |beer| %>
     <% @beers.order_by_name.each do |beer| %>
       <div class="col-12">
         <div class="beer-card m-3 p-3">
