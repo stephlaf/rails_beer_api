@@ -63,8 +63,8 @@ puts "Done Dieu du Ciel! 🍻"
 # ____________________________________________________
 # BEERS Farnham
 
-scrape_farnham
-puts "Done Farnham 🍻"
+# scrape_farnham
+# puts "Done Farnham 🍻"
 
 # ____________________________________________________
 # BEERS Brasseurs du Monde
