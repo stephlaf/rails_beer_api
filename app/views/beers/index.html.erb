@@ -1,7 +1,9 @@
 <div class="container text-center d-flex flex-column align-items-center">
   <h1>All Beers</h1>
 
-  <h3><%= link_to 'Scan a beer!', scan_beers_path  %></h3>
+  <%= link_to scan_beers_path do %>
+    <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 35 %>
+  <% end %>
   
   <div class="row">
     <%# @beers.order(id: :asc).each do |beer| %>

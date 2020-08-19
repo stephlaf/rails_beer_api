@@ -1,5 +1,5 @@
 <div class="container text-center">
-  <h1>Beers#show</h1>
+  <h1><%= @beer.name %></h1>
 
   <div class="my-3">
     <% if  current_user %>
@@ -19,7 +19,7 @@
 
   <div class="my-3">
     <ul>
-      <li><%= @beer.name %></li>
+      <!-- <li><%#= @beer.name %></li> -->
       <li>% d'Alcool: <%= @beer.alc_percent %></li>
       <li><%= @beer.short_desc %></li>
       <li><%= @beer.long_desc %></li>
