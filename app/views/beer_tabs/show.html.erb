@@ -5,5 +5,5 @@
   <p>Tried: <%= @beer_tab.tried ? 'yes' : 'not yet' %></p>
   <p>Rating: <%= @beer_tab.rating.zero? ? '💩' : '⭐️' * @beer_tab.rating %></p>
   
-  <%= link_to 'Back to all beers', root_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Back to all beers', beers_path, class: 'btn btn-secondary' %>
 </div>

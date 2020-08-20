@@ -1,5 +1,14 @@
-<h1>Breweries</h1>
+<div class="container text-center d-flex flex-column align-items-stretch">
+  <h1>Breweries</h1>
 
-<% @breweries.each do |brew| %>
-  <p><%= brew.name %></p>
-<% end %>
+    <% @breweries.order_by_name.each do |brew| %>
+      <% unless brew.beers.count.zero? %>
+        <%= link_to brewery_path(brew) do %>
+          <div class="brew-link">
+            <p><%= brew.name %></p>
+            <span><%= brew.beers.count %> beers</span>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+</div>

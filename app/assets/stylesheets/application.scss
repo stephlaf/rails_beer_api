@@ -3,29 +3,38 @@
 @import "config/colors";
 @import "config/bootstrap_variables";
 
+
 // External libraries
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 // Your CSS partials
+@import "beers/index";
+@import "breweries/index";
 @import "components/index";
 @import "pages/index";
-@import "beers.scss";
 
+
+body {
+  margin-top: 80px;
+}
 ul {
   list-style: none;
 }
-
+a {
+  color: $gray;
+}
 .my-container {
   width: 50%;
 }
-
-body {
-  margin-top: 56px;
+.blue-border {
+  border: 1px solid blue;
+}
+.red-border {
+  border: 1px solid red;
+}
+.green-border {
+  border: 1px solid green;
 }
 
-.beer-card {
-  background: white;
-  box-shadow: 3px 3px rgba(200, 200, 200, 0.3);
-}

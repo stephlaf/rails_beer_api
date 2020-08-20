@@ -1,16 +1,12 @@
-<div class="container text-center d-flex flex-column align-items-center">
-  <h1>All <%= @beers.count %> Beers</h1>
+<div class="container text-center">
+  <h1><%= @brewery.name %></h1>
 
-  <%= link_to scan_beers_path do %>
-    <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 35 %>
-  <% end %>
-  
   <div class="row">
-    <% @beers.order_by_name.each do |beer| %>
+    <% @brewery.beers.order_by_name.each do |beer| %>
       <div class="col-12">
         <div class="beer-card m-3 p-3">
           <h4><%= beer.name %></h4>
-          <p class=""><%= beer.brewery.name %></p>
+          <!-- <p class=""><%#= beer.brewery.name %></p> -->
           <p class="small"><%= beer.category %></p>
           <% if beer.ibu %>
             <p class=""><%= image_tag "hop.svg", alt: "hop", width: 20 %>: <span><%= beer.ibu %></span></p>

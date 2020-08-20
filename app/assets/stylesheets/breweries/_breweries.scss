@@ -1,0 +1,14 @@
+.brew-link {
+  background: white;
+  margin: 8px auto;
+  padding: 16px;
+  box-shadow: $box-shadow;
+  // width: 100%;
+
+  p {
+    margin: 0;
+    font-size: 18px;
+    font-family: $breweries-font;
+    font-weight: 500;
+  }
+}

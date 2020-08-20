@@ -18,18 +18,29 @@
   </div>
 
   <div class="my-3">
-    <ul>
-      <!-- <li><%#= @beer.name %></li> -->
-      <li>% d'Alcool: <%= @beer.alc_percent %></li>
-      <li><%= @beer.short_desc %></li>
-      <li><%= @beer.long_desc %></li>
-      <!-- <li>UPC: <%#= @beer.upc %></li> -->
-      <% if @beer.photo.attached? %>
-        <li><%= cl_image_tag @beer.photo.key, alt: "Label", width: '250' %></li>
-      <% end %>
-    </ul>
+    <% if @beer.photo.attached? %>
+      <%= cl_image_tag @beer.photo.key, alt: "Label", width: '150' %>
+    <% end %>
+
+    <div class="d-flex justify-content-around">
+      <p>Type: <%= @beer.category %></p>
+      <span><%= @beer.alc_percent %>%</span>
+    </div>
+
+    <p class="short-desc"><%= @beer.short_desc %></p>
+
+    <p><%= @beer.long_desc %></p>
   </div>
 
-  <%= link_to 'Scan another one!', scan_beers_path, class: 'btn btn-secondary' %>
-  <%= link_to 'Back to all beers', root_path, class: 'btn btn-secondary' %>
+  <%= link_to scan_beers_path, class: 'link-icons' do %>
+    <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 55 %>
+  <% end %>
+
+  <%= link_to breweries_path, class: 'link-icons' do  %>
+    <%= image_tag "brewery.svg", alt: "Brewery", width: 55 %>
+  <% end %>
+  
+  <%= link_to beers_path, class: 'link-icons' do %>
+    <%= image_tag "beer_can_bottle.svg", alt: "Scan", width: 55 %>
+  <% end %>
 </div>
