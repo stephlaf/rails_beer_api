@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_164531) do
+ActiveRecord::Schema.define(version: 2020_08_21_174029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_164531) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.bigint "beer_id"
+    t.string "content"
     t.index ["beer_id"], name: "index_beer_tabs_on_beer_id"
     t.index ["user_id"], name: "index_beer_tabs_on_user_id"
   end

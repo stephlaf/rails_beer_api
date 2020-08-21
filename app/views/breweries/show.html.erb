@@ -6,24 +6,59 @@
       <div class="col-12">
         <div class="beer-card m-3 p-3">
           <h4><%= beer.name %></h4>
-          <!-- <p class=""><%#= beer.brewery.name %></p> -->
           <p class="small"><%= beer.category %></p>
+
           <% if beer.ibu %>
             <p class=""><%= image_tag "hop.svg", alt: "hop", width: 20 %>: <span><%= beer.ibu %></span></p>
           <% end %>
 
           <% if  current_user %>
             <% if beer.beer_tabs.empty? %>
-              <%= link_to new_beer_beer_tab_path(beer) do  %>
-                <%= image_tag "mug_full.svg", alt: "Full pint", width: 30 %>
-              <% end %>
+              <%= link_to "Notez cette bière", new_beer_beer_tab_path(beer) %>
             <% else %>
               <% beer.beer_tabs.first(1).each do |beer_tab| %>
-                <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 20 %>      
-                <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+
+                <%= link_to edit_beer_beer_tab_path(beer, beer_tab) do %>
+                  <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+                <% end %> 
+
               <% end %>
+
             <% end %>
           <% end %>
+
+
+<!-- --------------------------------------------------------- -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- --------------------------------------------------------- -->
+
+
 
           <%= link_to beer_path(beer) do  %>
             <% if beer.photo.attached? %>

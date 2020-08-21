@@ -8,8 +8,8 @@ const initSelect2 = () => {
   const editBeerTabRegex = /beer_tabs\/\d+\/edit/
 
   $('.select2').select2({
-    width: '100%',
-    placeholder: 'How many ⭐️?',
+    width: '50%',
+    placeholder: "Combien d'⭐️ ?",
     // templateSelection: function () {
     //     if (newBeerRegex.test(url)) { // adjust for custom placeholder values
     //       return 'Brewery name?';
@@ -30,7 +30,7 @@ const initSelect2Brew = () => {
 
   $('.select2-breweries').select2({
     width: '100%',
-    placeholder: 'Brewery name?',
+    placeholder: 'Brasserie ?',
   });
 };
 

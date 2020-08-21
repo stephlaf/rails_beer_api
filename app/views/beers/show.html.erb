@@ -1,5 +1,6 @@
 <div class="container text-center">
   <h1><%= @beer.name %></h1>
+  <h2 class="brewery-name"><%= @beer.brewery.name %></h2>
 
   <div class="my-3">
     <% if  current_user %>
@@ -10,8 +11,9 @@
       <% else %>
         <% @beer.beer_tabs.first(1).each do |beer_tab| %>
           <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 30 %> 
-          <%= link_to 'Change the rating', edit_beer_beer_tab_path(@beer, beer_tab) %>
-          <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+          <%= link_to edit_beer_beer_tab_path(@beer, beer_tab) do %>
+            <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

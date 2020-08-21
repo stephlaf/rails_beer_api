@@ -24,6 +24,10 @@ ul {
 }
 a {
   color: $gray;
+  &:hover {
+    color: $hover-gray;
+    text-decoration: none;
+  }
 }
 .my-container {
   width: 50%;
