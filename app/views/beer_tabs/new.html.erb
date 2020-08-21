@@ -1,9 +1,10 @@
 <div class="container text-center">
   <h1>BeerTabs#new</h1>
   <div class="my-3">
-    <h3><%= @beer.name %></h3>
+    <h3><%= link_to @beer.name, beer_path(@beer) %></h3>
     <%= cl_image_tag @beer.photo.key, alt: @beer.name, width: 150 %>
   </div>
 
   <%= render 'form' %>
+  <%= render 'shared/links_footer' %>
 </div>

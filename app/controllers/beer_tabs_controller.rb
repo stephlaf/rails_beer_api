@@ -60,6 +60,6 @@ class BeerTabsController < ApplicationController
   end
 
   def beer_tab_params
-    params.require(:beer_tab).permit(:rating)
+    params.require(:beer_tab).permit(:rating, :content)
   end
 end
