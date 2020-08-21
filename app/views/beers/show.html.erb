@@ -56,8 +56,8 @@
       <%= cl_image_tag @beer.photo.key, alt: "Label", width: '150' %>
     <% end %>
 
-    <div class="d-flex justify-content-around">
-      <p>Type: <%= @beer.category %></p>
+    <div class="d-flex justify-content-around mt-2">
+      <h5 class="my-0">Type: <%= @beer.category %></h5>
       <span><%= @beer.alc_percent %>%</span>
     </div>
 
