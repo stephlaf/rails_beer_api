@@ -71,13 +71,14 @@ require_relative './scrapers/scrape_trefle_noir'
 # BEERS Farnham
 
 # scrape_farnham
-# puts "Done Farnham 🍻"
+load_csv
+puts "Done Farnham 🍻"
 
 # ____________________________________________________
 # BEERS Trefle Noir
 
-scrape_trefle_noir
-puts "Done Trefle Noir 🍻"
+# scrape_trefle_noir
+# puts "Done Trefle Noir 🍻"
 
 
 
