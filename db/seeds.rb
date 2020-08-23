@@ -71,8 +71,8 @@ require_relative './scrapers/scrape_trefle_noir'
 # BEERS Farnham
 
 # scrape_farnham
-load_csv
-puts "Done Farnham 🍻"
+# load_csv
+# puts "Done Farnham 🍻"
 
 # ____________________________________________________
 # BEERS Trefle Noir
@@ -96,5 +96,10 @@ puts "Done Farnham 🍻"
 
 #   counter += 1
 # end
+
+# ___________________________________________________
+# UPCs assign
+
+
 
 puts "All done 😃"
