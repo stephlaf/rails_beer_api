@@ -13,6 +13,8 @@ class BeersController < ApplicationController
 
   def show
     @beer = Beer.find(params[:id])
+    @beer_tab = BeerTab.where({ beer_id: @beer.id, user_id: current_user.id }).first
+    # raise
   end
   
   def new_upc

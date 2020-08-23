@@ -16,16 +16,18 @@
             <p class=""><%= image_tag "hop.svg", alt: "hop", width: 20 %>: <span><%= beer.ibu %></span></p>
           <% end %>
 
+          <% beer_tab = BeerTab.where({ beer_id: beer.id, user_id: current_user.id }).first %>
+
           <% if  current_user %>
-            <% if beer.beer_tabs.empty? %>
+            <% if beer_tab.nil? %>
               <%= link_to new_beer_beer_tab_path(beer) do  %>
                 <%= image_tag "mug_full.svg", alt: "Full pint", width: 30 %>
               <% end %>
             <% else %>
-              <% beer.beer_tabs.first(1).each do |beer_tab| %>
-                <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 20 %>      
-                <span><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
-              <% end %>
+              <%# beer.beer_tabs.first(1).each do |beer_tab| %>
+                <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 20 %>    
+                <span class="beerRating"><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
+              <%# end %>
             <% end %>
           <% end %>
 
