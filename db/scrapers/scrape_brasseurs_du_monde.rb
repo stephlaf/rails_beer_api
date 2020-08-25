@@ -34,7 +34,7 @@ def scrape_brasseurs_du_monde
 
   puts "Creating Brasseurs du Monde beers..."
 
-  brewery = Brewery.find_by(name: 'Brasseurs Du Monde')
+  brewery = Brewery.find_by(name: "Brasseurs du Monde")
 
   link_pairs.each do |link_pair|
     html = open(link_pair[:link]).read

@@ -1,147 +1,91 @@
-# require 'open-uri'
-# require 'nokogiri'
-# require 'csv'
+require 'open-uri'
+require 'nokogiri'
+require 'csv'
 
-# require_relative './scrapers/scrape_brasseurs_du_monde'
-# require_relative './scrapers/scrape_dieu_du_ciel'
-# require_relative './scrapers/scrape_farnham'
-# require_relative './scrapers/scrape_trefle_noir'
-# require_relative './scrapers/scrape_hermite'
-# require_relative './scrapers/upc_assign'
+require_relative './scrapers/load_breweries'
+require_relative './scrapers/scrape_brasseurs_du_monde'
+require_relative './scrapers/scrape_dieu_du_ciel'
+require_relative './scrapers/scrape_farnham'
+require_relative './scrapers/scrape_trefle_noir'
+require_relative './scrapers/scrape_hermite'
+require_relative './scrapers/upc_assign'
 
-# # ______________________________________
-# # BEER TABS
-# puts "Destroying all beer tabs..."
-# BeerTab.destroy_all
+# ______________________________________
+# BEER TABS
 
-# # ______________________________________
-# # USERS
+puts "Destroying all beer tabs..."
+BeerTab.destroy_all
 
-# puts "Destroying all users..."
-# User.destroy_all
+# ______________________________________
+# USERS
 
-# puts "Creating users..."
+puts "Destroying all users..."
+User.destroy_all
 
-# names = %w[a b c d e]
-# user_counter = 0
+puts "Creating users..."
 
-# 5.times do
-#   User.create!(email: "#{names[user_counter]}@#{names[user_counter]}.#{names[user_counter]}", password: '123456')
-#   user_counter += 1
-# end
+names = %w[a b c d e]
+user_counter = 0
 
-# # ________________________________________
-# # BREWERIES
+5.times do
+  User.create!(email: "#{names[user_counter]}@#{names[user_counter]}.#{names[user_counter]}", password: '123456')
+  user_counter += 1
+end
 
-# puts "Destroying all breweries..."
-# Brewery.destroy_all
+# ________________________________________
+# BREWERIES
 
-# # Gettings names from CSV
-# filepath = File.join(__dir__, 'amq.csv')
-# csv_options = { col_sep: ',', headers: :first_row, header_converters: :symbol }
+puts "Destroying all breweries..."
+Brewery.destroy_all
 
-# amq_names = []
+puts "Loading all breweries..."
+load_breweries
 
-# CSV.foreach(filepath, csv_options) do |row|
-#   amq_names << row[:name].titleize.gsub(/\s{2,}/, ' ').gsub('à', 'À')#.gsub("L'", "l'")
-# end
+pp Brewery.all
 
-# clean_amq_names = amq_names.uniq
+# ________________________________________
+# BEERS
 
-# puts "Creating breweries from AMQ list..."
+puts "Destroying all beers..."
+Beer.destroy_all
 
-# clean_amq_names.each do |name|
-#   Brewery.create!(name: name)
-# end
+# ____________________________________________________
+# BEERS Brasseurs du Monde
 
-# # pp Brewery.all
+scrape_brasseurs_du_monde
+puts "Done Brasseurs du Monde 🍻"
 
-# # ________________________________________
-# # BEERS
+# ________________________________________
+# BEERS Dieu du Ciel!
 
-# puts "Destroying all beers..."
-# Beer.destroy_all
+scrape_dieu_du_ciel
+puts "Done Dieu du Ciel! 🍻"
 
-# # ____________________________________________________
-# # BEERS Brasseurs du Monde
+# ____________________________________________________
+# BEERS Farnham
 
-# scrape_brasseurs_du_monde
-# puts "Done Brasseurs du Monde 🍻"
+scrape_farnham
+load_csv
+puts "Done Farnham 🍻"
 
-# # ________________________________________
-# # BEERS Dieu du Ciel!
+# ____________________________________________________
+# BEERS Trefle Noir
 
-# scrape_dieu_du_ciel
-# puts "Done Dieu du Ciel! 🍻"
+scrape_trefle_noir
+puts "Done Trefle Noir 🍻"
 
-# # ____________________________________________________
-# # BEERS Farnham
+# ____________________________________________________
+# BEERS Hermite
 
-# scrape_farnham
-# load_csv
-# puts "Done Farnham 🍻"
+scrape_hermite
+puts "Done Hermite 🍻"
 
-# # ____________________________________________________
-# # BEERS Trefle Noir
-
-# scrape_trefle_noir
-# puts "Done Trefle Noir 🍻"
-
-# # ____________________________________________________
-# # BEERS Hermite
-
-# scrape_hermite
-# puts "Done Hermite 🍻"
-
-# # ___________________________________________________
-# # UPCs assign
-# puts "Assigning UPCs..."
-# upc_assign
+# ___________________________________________________
+# UPCs assign
+puts "Assigning UPCs..."
+upc_assign
 
 # # ____________________________________________________
 # # UPCs Randomize
 
-# # counter = 0
-# # upcs = %w[4902125189003 0011391001897 0011391001835 14214267-000499 0060383857974 7630054475702 7630054474606]
-# # beers = Beer.all
-
-# # upcs.count.times do
-# #   random_beer = beers.sample
-# #   random_beer.upc = upcs[counter]
-# #   random_beer.save!
-
-# #   counter += 1
-# # end
-
-# puts "All done 😃"
-
-require 'csv'
-
-filepath = File.join(__dir__, 'amq.csv')
-csv_options = { col_sep: ',', headers: :first_row, header_converters: :symbol }
-
-accents = %w[à è é]
-amq_names = []
-
-CSV.foreach(filepath, csv_options) do |row|
-  cleaned = row[:name].gsub(/\s{2,}/, ' ').gsub(/\s-\s/, ' ').gsub(/[[:space]]/, '')#.gsub("L'", "l'")
-  titled = []
-  
-  cleaned.titleize.split.each_with_index do |str, index|
-    if index.zero? && (str == 'à' || str == 'la' || str == 'le' || str == 'ô')
-      titled << str.upcase
-    elsif index.positive? && (str == 'À' || str == 'La' || str == 'Le' || str == 'De' || str == 'Les' || str == 'Du' || str == 'Sur') || str == 'Et'
-      titled << str.downcase
-    elsif str.start_with?("L'")
-      splitted = str.split("'")
-      first = splitted.first.downcase
-      last = splitted.last.capitalize
-      titled << "#{first}'#{last}"
-    else
-      titled << str
-    end
-  end
-
-  # titled.gsub('à', 'À') if titled.start_with?('à')
-  pp titled.join(' ')
-end
+puts "All done 😃"

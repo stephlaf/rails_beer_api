@@ -15,7 +15,7 @@ def scrape_dieu_du_ciel
 
   puts "Creating Dieu du Ciel! beers..."
 
-  brewery = Brewery.find_by(name: 'Dieu Du Ciel!')
+  brewery = Brewery.find_by(name: "Dieu du Ciel!")
 
   links.each do |link|
     html = open(link).read

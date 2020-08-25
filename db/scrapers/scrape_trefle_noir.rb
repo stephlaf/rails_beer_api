@@ -22,7 +22,7 @@ def scrape_trefle_noir
 
   puts "Creating Trefle Noir beers..."
 
-  brewery = Brewery.find_by(name: 'LE TRÈFLE NOIR MICROBRASSERIE'.titleize)
+  brewery = Brewery.find_by(name: "Le Trèfle Noir Microbrasserie")
 
   counter = 1
 

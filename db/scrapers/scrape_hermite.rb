@@ -42,7 +42,7 @@ def scrape_hermite
     end
   end
 
-  brewery = Brewery.find_or_initialize_by(name: "l'hermite")
+  brewery = Brewery.find_or_initialize_by(name: "L'Hermite")
   brewery.save!
 
   infos.each do |beer_hash|

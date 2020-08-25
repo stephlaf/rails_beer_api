@@ -6,7 +6,7 @@ def scrape_farnham
   html = open(url).read
   doc = Nokogiri::HTML(html)
   
-  brewery = Brewery.find_or_initialize_by(name: 'Farnham')
+  brewery = Brewery.find_or_initialize_by(name: "Farnham")
   brewery.save!
   
   infos = []
