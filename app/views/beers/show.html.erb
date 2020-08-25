@@ -4,7 +4,7 @@
 
   <div class="my-3">
     <% if  current_user %>
-      <% if @beer.beer_tabs.empty? %>
+      <% if @beer_tab.nil? %>
         <%= link_to "Notez cette bière", new_beer_beer_tab_path(@beer) %>
 
         <%#= link_to new_beer_beer_tab_path(@beer) do  %> 

@@ -1,0 +1,2 @@
+module TempBeersHelper
+end

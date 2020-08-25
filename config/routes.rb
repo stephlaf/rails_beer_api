@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   resources :beer_tabs, only: [:index, :show, :destroy]
 
   resources :breweries, only: [:index, :show, :new, :create]
+
+  resources :temp_beers, except: [:new, :edit, :update]
+  get 'temp_beers/new/:upc', to: 'temp_beers#new', as: 'temp_new_upc'
+
 end

@@ -56,9 +56,11 @@ const callController = (scanResult) => {
         }
       } else {
         if (localhostRegex.test(url)) {
-          window.location.assign(`http://localhost:3000/beers/new/${data.upc}`)
+          // window.location.assign(`http://localhost:3000/beers/new/${data.upc}`)
+          window.location.assign(`http://localhost:3000/temp_beers/new/${data.upc}`)
         } else if (herokuRegex.test(url)) {
-          window.location.assign(`https://hopscan.herokuapp.com/beers/new/${data.upc}`)
+          // window.location.assign(`https://hopscan.herokuapp.com/beers/new/${data.upc}`)
+          window.location.assign(`https://hopscan.herokuapp.com/temp_beers/new/${data.upc}`)
         }
       }
     });

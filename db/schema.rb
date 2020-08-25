@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_174029) do
+ActiveRecord::Schema.define(version: 2020_08_25_183107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_174029) do
     t.float "rating"
     t.bigint "brewery_id", null: false
     t.integer "ibu"
+    t.boolean "approved", default: false
     t.index ["brewery_id"], name: "index_beers_on_brewery_id"
   end
 
@@ -68,6 +70,17 @@ ActiveRecord::Schema.define(version: 2020_08_21_174029) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "temp_beers", force: :cascade do |t|
+    t.string "name"
+    t.string "brewery_name"
+    t.string "upc"
+    t.boolean "converted", default: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_temp_beers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,4 +99,5 @@ ActiveRecord::Schema.define(version: 2020_08_21_174029) do
   add_foreign_key "beer_tabs", "beers"
   add_foreign_key "beer_tabs", "users"
   add_foreign_key "beers", "breweries"
+  add_foreign_key "temp_beers", "users"
 end

@@ -6,7 +6,7 @@ const sortStuff = (() => {
   // console.log(beerCards[0]);
   const list = ['hi', 'hey', 'hello', 'sup', 'yo']
   // matchSorter(list, 'h');
-  console.log(matchSorter(list, 'h'));
+  // console.log(matchSorter(list, 'h'));
 });
 
 export { sortStuff };

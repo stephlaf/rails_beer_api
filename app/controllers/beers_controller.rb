@@ -1,11 +1,11 @@
 # require 'pry-byebug'
 
 class BeersController < ApplicationController
-  # skip_before_action :authenticate_user!, only: :home
+  skip_before_action :authenticate_user!, only: [:index, :show]
   
   def index
     if params[:query].present?
-      @beers = Beer.global_search(params[:query])#.order(name: :asc)
+      @beers = Beer.global_search(params[:query])
     else
       @beers = Beer.all
     end
@@ -13,39 +13,41 @@ class BeersController < ApplicationController
 
   def show
     @beer = Beer.find(params[:id])
-    @beer_tab = BeerTab.where({ beer_id: @beer.id, user_id: current_user.id }).first
+    if current_user
+      @beer_tab = BeerTab.where({ beer_id: @beer.id, user_id: current_user.id }).first
+    end
     # raise
   end
   
-  def new_upc
-    @breweries = Brewery.all
-    @beer = Beer.new(upc: params[:upc])
-  end
-
   def new
     @beer = Beer.new(upc: params[:upc])
     # @beer.upc = params[:upc]
   end
 
-  def create
-    @brewery = Brewery.find_by(name: params[:beer][:brewery])
+  # def new_upc
+  #   @breweries = Brewery.all
+  #   @beer = Beer.new(upc: params[:upc])
+  # end
 
-    if @brewery.nil?
-      @brewery = Brewery.create!(name: params[:beer][:brewery])
-    end
+  # def create
+  #   @brewery = Brewery.find_by(name: params[:beer][:brewery])
 
-    params_hash = beer_params
-    params_hash.delete(:brewery)
+  #   if @brewery.nil?
+  #     @brewery = Brewery.create!(name: params[:beer][:brewery])
+  #   end
 
-    @beer = Beer.new(params_hash)
-    @beer.brewery = @brewery
+  #   params_hash = beer_params
+  #   params_hash.delete(:brewery)
 
-    if @beer.save
-      redirect_to beer_path(@beer)
-    else
-      render :new_upc
-    end
-  end
+  #   @beer = Beer.new(params_hash)
+  #   @beer.brewery = @brewery
+
+  #   if @beer.save
+  #     redirect_to root_path
+  #   else
+  #     render :new_upc
+  #   end
+  # end
 
   def edit
   end
@@ -69,7 +71,8 @@ class BeersController < ApplicationController
   private
 
   def beer_params
-    params.require(:beer).permit(:name, :brewery, :alc_percent, :short_desc, :long_desc, :photo, :upc)
+    # params.require(:beer).permit(:name, :brewery, :alc_percent, :short_desc, :long_desc, :photo, :upc)
+    params.require(:beer).permit(:name, :brewery, :photo, :upc)
   end
 end
 
