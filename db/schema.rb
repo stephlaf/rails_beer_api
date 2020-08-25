@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_183107) do
+ActiveRecord::Schema.define(version: 2020_08_25_203629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 2020_08_25_183107) do
     t.float "rating"
     t.bigint "brewery_id", null: false
     t.integer "ibu"
-    t.boolean "approved", default: false
     t.index ["brewery_id"], name: "index_beers_on_brewery_id"
   end
 

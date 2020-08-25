@@ -80,14 +80,6 @@ puts "Done Trefle Noir 🍻"
 scrape_hermite
 puts "Done Hermite 🍻"
 
-# ____________________________________________________
-# BEERS Setting all to Approved
-
-Beer.all.each do |beer|
-  beer.approved = true
-  beer.save!
-end
-
 # ___________________________________________________
 # UPCs assign
 puts "Assigning UPCs..."
