@@ -64,7 +64,7 @@ puts "Done Dieu du Ciel! 🍻"
 # ____________________________________________________
 # BEERS Farnham
 
-scrape_farnham
+# scrape_farnham
 load_csv
 puts "Done Farnham 🍻"
 
