@@ -14,13 +14,12 @@
   </head>
 
   <body>
-    <!-- <div class="container text-center"> -->
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/flashes' %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
 
-      <%#= render 'shared/search_field' %>
+    <%#= render 'shared/search_field' %>
 
-      <%= yield %>
-    <!-- </div> -->
+    <%= yield %>
+    <%= render 'shared/links_footer' %>
   </body>
 </html>

@@ -21,14 +21,11 @@
             <% beer_tab = BeerTab.where({ beer_id: beer.id, user_id: current_user.id }).first %>
             
             <% if beer_tab.nil? %>
-              <%= link_to new_beer_beer_tab_path(beer) do  %>
-                <%= image_tag "mug_full.svg", alt: "Full pint", width: 30 %>
-              <% end %>
+              <%= link_to "Notez cette bière", new_beer_beer_tab_path(beer) %>
             <% else %>
-              <%# beer.beer_tabs.first(1).each do |beer_tab| %>
-                <%#= image_tag "mug_empty.svg", alt: "Empty pint", width: 20 %>    
-                <span class="beerRating"><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></span>
-              <%# end %>
+              <% @beer = beer %>
+              <% @beer_tab = beer_tab %>
+              <%= render 'beer_tab_modal', locals: { beer: @beer, beer_tab: @beer_tab } %>
             <% end %>
           <% end %>
 
@@ -41,6 +38,4 @@
       </div>
     <% end %>
   </div>
-
-  <%= render 'shared/links_footer' %>
 </div>
