@@ -27,7 +27,7 @@ class BeerTabsController < ApplicationController
     # raise
 
     if @beer_tab.save
-      redirect_to beer_tab_path(@beer_tab)   
+      redirect_to beer_path(@beer)
     else
       render :new
     end
@@ -40,7 +40,7 @@ class BeerTabsController < ApplicationController
     @beer_tab.update(beer_tab_params)
 
     if @beer_tab.save
-      redirect_to beer_tab_path(@beer_tab) 
+      redirect_to beer_path(@beer) 
     else
       render :edit
     end
