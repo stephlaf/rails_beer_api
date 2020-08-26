@@ -36,6 +36,7 @@ gem 'simple_form'
 gem 'cloudinary', '~> 1.16.0'
 gem 'devise'
 gem 'pg_search', '~> 2.3.0'
+gem 'turbolinks_render'
 
 gem 'dotenv-rails', groups: [:development, :test]
 

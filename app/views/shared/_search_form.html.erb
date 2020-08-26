@@ -1,0 +1,10 @@
+<div class="search-form-container">
+  <%= form_tag beers_path, method: :get, class: 'search-form' do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "search-field"
+      # placeholder: ""
+    %>
+    <%= submit_tag "🔎", class: "search-submit-button" %>
+  <% end %>
+</div>

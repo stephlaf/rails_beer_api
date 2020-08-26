@@ -1,21 +1,31 @@
 <div class="container text-center d-flex flex-column align-items-center">
-  <h1>Hopscan</h1>
+  <!-- <h1>Hopscan</h1> -->
 
-  <div class="home-link">
-    <%= link_to scan_beers_path do %>
-      <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 80 %>
-    <% end %>
-  </div>
+  <!-- <div class="home-link-groups d-flex justify-content-between"> -->
+    <div class="home-link">
+      <%= link_to scan_beers_path do %>
+        <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 70 %>
+      <% end %>
+    </div>
 
-  <div class="home-link">
-    <%= link_to breweries_path do  %>
-      <%= image_tag "brewery.svg", alt: "Brewery", width: 80 %>
-    <% end %>
-  </div>
+<!--     <div class="home-link">
+      <%#= link_to scan_beers_path do %>
+        <%#= image_tag "loupe.svg", alt: "Scan", width: 70 %>
+      <%# end %>
+    </div> -->
+  <!-- </div> -->
 
-  <div class="home-link">
-    <%= link_to beers_path do  %>
-      <%= image_tag "beer_can_bottle.svg", alt: "Beer can & bottle", width: 80 %>
-    <% end %>
-  </div>
+  <!-- <div class="home-link-groups d-flex justify-content-between"> -->
+    <div class="home-link">
+      <%= link_to breweries_path do  %>
+        <%= image_tag "brewery.svg", alt: "Brewery", width: 70 %>
+      <% end %>
+    </div>
+
+    <div class="home-link">
+      <%= link_to beers_path do  %>
+        <%= image_tag "beer_can_bottle.svg", alt: "Beer can & bottle", width: 70 %>
+      <% end %>
+    </div>
+  <!-- </div> -->
 </div>

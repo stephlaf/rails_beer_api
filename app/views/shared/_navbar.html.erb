@@ -3,16 +3,7 @@
     <%= image_tag "logo.svg" %>
   <% end %>
 
-  <div class="">
-    <%= form_tag beers_path, method: :get, class: 'search-form' do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "search-field"
-        # placeholder: ""
-      %>
-      <%= submit_tag "🔎", class: "" %>
-    <% end %>
-  </div>
+  <%= render 'shared/search_form' %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
