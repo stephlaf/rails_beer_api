@@ -1,8 +1,8 @@
-<div class="search-form-container red-border">
-  <%= form_tag beers_path, method: :get, class: 'search-form' do %>
+<div class="search-form-container">
+  <%= form_tag beers_path, method: :get, class: 'search-form d-flex justify-content-between' do %>
     <%= text_field_tag :query,
       params[:query],
-      class: "search-field"
+      class: "search-field "
       # placeholder: ""
     %>
     <%= submit_tag "🔎", class: "search-submit-button" %>
