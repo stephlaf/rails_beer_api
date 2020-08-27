@@ -1,39 +1,38 @@
-<div class="container text-center d-flex flex-column align-items-center">
-  <h2><%=pluralize @beers.count, 'Résultat' %></h2>
-
-  <%= link_to scan_beers_path do %>
-    <%= image_tag "scanning-barcode.svg", alt: "Scan", width: 35 %>
-  <% end %>
+<div class="container d-flex flex-column align-items-center">
+  <p class="results-count"><%=pluralize @beers.count, 'Résultat' %></p>
   
   <div class="row">
     <% @beers.order_by_name.each do |beer| %>
       <div class="col-12">
-        <div class="beer-card m-3 p-3">
-          <h4><%= beer.name %></h4>
-          <p class=""><%= beer.brewery.name %></p>
-          <p class="small"><%= beer.category %></p>
-          <% if beer.ibu %>
-            <p class=""><%= image_tag "hop.svg", alt: "hop", width: 20 %>: <span><%= beer.ibu %></span></p>
-          <% end %>
 
+        <div class="beer-card m-3 p-2">
+          <!-- <h4 class="beer-card-name"><%#= beer.name %></h4> -->
+          <h4 class="beer-card-name"><%= link_to beer.name, beer_path(beer) %></h4>
 
-          <% if  current_user %>
-            <% beer_tab = BeerTab.where({ beer_id: beer.id, user_id: current_user.id }).first %>
-            
-            <% if beer_tab.nil? %>
-              <%= link_to "Notez cette bière", new_beer_beer_tab_path(beer) %>
-            <% else %>
-              <% @beer = beer %>
-              <% @beer_tab = beer_tab %>
-              <%= render 'beer_tab_modal', locals: { beer: @beer, beer_tab: @beer_tab } %>
+          <div class="d-flex justify-content-start">
+
+            <%= link_to beer_path(beer) do  %>
+              <% if beer.photo.attached? %>
+                <div class="beer-card-img"><%= cl_image_tag beer.photo.key, height: 75, crop: :thumb %></div>
+              <% else %>
+                <div class="beer-card-img"><%= image_tag 'default_beer.png', height: 75 %></div>
+              <% end %>
             <% end %>
-          <% end %>
 
-          <%= link_to beer_path(beer) do  %>
-            <% if beer.photo.attached? %>
-              <div class="my-3"><%= cl_image_tag beer.photo.key, height: 150, crop: :thumb %></div>
-            <% end %>
-          <% end %>
+            <div class="beer-card-beer-infos d-flex flex-column align-items-start">
+              <p class="beer-card-brewery-name"><%= beer.brewery.name %></p>
+              <p class="beer-card-category"><%= beer.category %></p>
+            </div>
+
+            <div class="beer-card-beer-icons d-flex flex-column align-items-start">
+              <p class="beer-card-ibu"><%= image_tag "hop.svg", alt: "hop", width: 20 %>: <%= beer.ibu ? beer.ibu : '?' %></p>
+
+              <% if  current_user %>
+                <% beer_tab = BeerTab.where({ beer_id: beer.id, user_id: current_user.id }).first %>
+                <%= beer_tab.nil? ? '⭐️: ?' : "⭐️: #{beer_tab.rating}" %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>

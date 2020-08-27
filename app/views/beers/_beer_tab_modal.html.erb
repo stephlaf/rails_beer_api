@@ -1,5 +1,5 @@
 <%= link_to edit_beer_beer_tab_path(@beer, @beer_tab),'data-toggle': "modal", 'data-target': "#beerTabModal#{@beer.id}" do %>
-  <span><%= @beer_tab.rating.zero? ? '💩' : '⭐️' * @beer_tab.rating %></span>
+  <span><%= @beer_tab.rating.zero? ? '👎🏼' : '⭐️' * @beer_tab.rating %></span>
 <% end %> 
 
 <div class="modal fade" id="beerTabModal<%= @beer.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -13,7 +13,7 @@
       </div>
 
       <div class="modal-body">
-        <div class="my-3"><%= @beer_tab.rating.zero? ? '💩' : '⭐️' * @beer_tab.rating %></div>
+        <div class="my-3"><%= @beer_tab.rating.zero? ? '👎🏼' : '⭐️' * @beer_tab.rating %></div>
         <p><%= @beer_tab.content %></p>
 
       </div>

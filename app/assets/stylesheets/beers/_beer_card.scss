@@ -1,4 +1,40 @@
 .beer-card {
   background: white;
   box-shadow: $box-shadow;
+  a {
+    margin: 0;
+  }
+}
+.beer-card-beer-infos {
+  padding-left: 9px;
+  flex-grow: 1;
+}
+.beer-card-name {
+  padding-top: 6px;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+}
+.beer-card-brewery-name {
+  margin: 0;
+  font-family: $breweries-font;
+  font-size: 18px;
+}
+.beer-card-category {
+  margin: 0;
+  margin: 0;
+
+}
+.beer-card-beer-icons {
+  padding-left: 9px;
+  min-width: 25%;
+}
+.beer-card-ibu {
+  margin-bottom: 10px;
+}
+.beer-card-tab-link {
+
+}
+.beer-card-img {
+
 }

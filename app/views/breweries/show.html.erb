@@ -33,7 +33,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <div class="my-3"><%= beer_tab.rating.zero? ? '💩' : '⭐️' * beer_tab.rating %></div>
+                        <div class="my-3"><%= beer_tab.rating.zero? ? '👎🏼' : '⭐️' * beer_tab.rating %></div>
                         <p><%= beer_tab.content %></p>
 
                       </div>
@@ -54,6 +54,8 @@
           <%= link_to beer_path(beer) do  %>
             <% if beer.photo.attached? %>
               <div class="my-3"><%= cl_image_tag beer.photo.key, height: 150, crop: :thumb %></div>
+            <% else %>
+              <div class="my-3"><%= image_tag 'default_beer.png', height: 150 %></div>
             <% end %>
           <% end %>
         </div>

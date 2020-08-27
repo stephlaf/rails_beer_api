@@ -1,11 +1,14 @@
-.brewery-name {
+.brewery-name { // Used in beers/show
   font-family: $breweries-font;
   font-weight: 500;
   font-size: 26px;
 }
 .beer-type {
-  font-size: 24px;
+  // font-size: 24px;
 }
 .short-desc {
   
+}
+.results-count {
+  font-size: 26px;
 }
