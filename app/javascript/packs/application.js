@@ -21,4 +21,6 @@ require("channels")
 
 import 'bootstrap';
 import 'select2/dist/css/select2.css';
+
+import '../components/index.js';
 import '../plugins/index.js';

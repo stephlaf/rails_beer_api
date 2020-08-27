@@ -16,12 +16,10 @@ class BeersController < ApplicationController
     if current_user
       @beer_tab = BeerTab.where({ beer_id: @beer.id, user_id: current_user.id }).first
     end
-    # raise
   end
   
   def new
     @beer = Beer.new(upc: params[:upc])
-    # @beer.upc = params[:upc]
   end
 
   # def new_upc
