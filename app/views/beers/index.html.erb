@@ -1,11 +1,10 @@
 <div class="container d-flex flex-column align-items-center">
-  <p class="results-count"><%=pluralize @beers.count, 'Résultat' %></p>
+  <p id="results-count"><%=pluralize @beers.count, 'Résultat' %></p>
   
-  <div class="row">
+  <div class="row" id="all-beers-container">
     <% @beers.order_by_name.each do |beer| %>
       <div class="col-12">
-
-        <div class="beer-card m-3 p-2">
+        <div data-id="<%= beer.id %>" class="beer-card m-3 p-2">
           <!-- <h4 class="beer-card-name"><%#= beer.name %></h4> -->
           <h4 class="beer-card-name"><%= link_to beer.name, beer_path(beer) %></h4>
 

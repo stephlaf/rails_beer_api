@@ -18,4 +18,10 @@ Rails.application.routes.draw do
   resources :temp_beers, except: [:new, :edit, :update]
   get 'temp_beers/new/:upc', to: 'temp_beers#new', as: 'temp_new_upc'
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      get 'beers/search/', to: 'beers#search', as: 'search'
+    end
+  end
+
 end

@@ -2,8 +2,7 @@
   <%= form_tag beers_path, method: :get, class: 'search-form d-flex justify-content-between' do %>
     <%= text_field_tag :query,
       params[:query],
-      class: "search-field "
-      # placeholder: ""
+      class: "search-field"
     %>
     <%= submit_tag "🔎", class: "search-submit-button" %>
   <% end %>
