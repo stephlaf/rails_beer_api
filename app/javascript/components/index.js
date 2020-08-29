@@ -1,7 +1,8 @@
 import { hideFooterFromHomePage } from './footer_links';
-import { submitSearchFormAjax } from './search_form';
+import { submitSearchFormAjax, setUrlInHTTPSearchForm } from './search_form';
 
 document.addEventListener('turbolinks:load', () => {
   hideFooterFromHomePage();
   submitSearchFormAjax();
+  setUrlInHTTPSearchForm();
 });

@@ -4,6 +4,7 @@
       params[:query],
       class: "search-field"
     %>
+    <%= hidden_field_tag :url, params[:url], id: "currentUrl" %>
     <%= submit_tag "🔎", class: "search-submit-button" %>
   <% end %>
 </div>
