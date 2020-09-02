@@ -5,6 +5,7 @@ const hideFooterFromHomePage = () => {
 
   if (homePages.includes(url)) {
     linksFooter.innerHTML = '';
+    // linksFooter.hidden = true;
   }
 };
 

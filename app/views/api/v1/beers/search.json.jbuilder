@@ -1,5 +1,5 @@
 json.array! @beers do |beer|
-  json.extract! beer, :id
+  json.extract! beer, :id#,
                       # :name,
                       # :rating,
                       # :brewery_id,

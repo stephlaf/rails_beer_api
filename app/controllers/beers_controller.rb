@@ -5,11 +5,13 @@ class BeersController < ApplicationController
   
   def index
     if params[:query].present?
-      @beers = Beer.global_search(params[:query])
+      @beers = Beer.includes(:brewery).global_search(params[:query])
       @url = params[:url]
     else
-      @beers = Beer.all
+      @beers = Beer.includes(:brewery)
     end
+    # raise
+    # request.headers['HTTP_HOST']
   end
 
   def show
