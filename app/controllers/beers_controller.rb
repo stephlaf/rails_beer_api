@@ -1,17 +1,19 @@
-# require 'pry-byebug'
-
 class BeersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   
   def index
     if params[:query].present?
       @beers = Beer.includes(:brewery).global_search(params[:query])
+      
+      if @beers.empty?
+        flash.now[:notice] = "Aucun résultat 😕"
+        @beers = Beer.includes(:brewery)
+      end
+
       @url = params[:url]
     else
       @beers = Beer.includes(:brewery)
     end
-    # raise
-    # request.headers['HTTP_HOST']
   end
 
   def show
