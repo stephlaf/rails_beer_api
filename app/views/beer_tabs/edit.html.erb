@@ -3,7 +3,12 @@
 
   <div class="my-3">
     <h3><%= link_to @beer.name, beer_path(@beer) %></h3>
-    <%= cl_image_tag @beer.photo.key, alt: @beer.name, width: 150 %>
+    
+    <% if @beer.photo.attached? %>
+      <%= cl_image_tag @beer.photo.key, width: 150 %>
+    <% else %>
+      <%= image_tag 'default_beer.png', width: 150 %>
+    <% end %>
   </div>
 
   <%= render 'form' %>

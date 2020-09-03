@@ -1,5 +1,5 @@
 <div class="search-form-container">
-  <%= form_tag beers_path, method: :get, class: 'search-form d-flex justify-content-between' do %>
+  <%= form_tag beers_path, method: :get, remote: true, class: 'search-form d-flex justify-content-between', id: 'remote-search-form' do %>
     <%= text_field_tag :query,
       params[:query],
       class: "search-field"

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'beers/search/', to: 'beers#search', as: 'search'
+      get 'beers/load/', to: 'beers#load', as: 'load'
     end
   end
 

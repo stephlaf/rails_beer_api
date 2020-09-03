@@ -1,0 +1,31 @@
+<div class="col-12">
+  <div data-id="<%= beer.id %>" class="beer-card m-3 p-2">
+    <!-- <h4 class="beer-card-name"><%#= beer.name %></h4> -->
+    <h4 class="beer-card-name"><%= link_to beer.name, beer_path(beer) %></h4>
+
+    <div class="d-flex justify-content-start">
+
+      <%= link_to beer_path(beer) do  %>
+        <% if beer.photo.attached? %>
+          <div class="beer-card-img"><%= cl_image_tag beer.photo.key, height: 75, crop: :thumb %></div>
+        <% else %>
+          <div class="beer-card-img"><%= image_tag 'default_beer.png', height: 75 %></div>
+        <% end %>
+      <% end %>
+
+      <div class="beer-card-beer-infos d-flex flex-column align-items-start">
+        <p class="beer-card-brewery-name"><%= beer.brewery.name %></p>
+        <p class="beer-card-category"><%= beer.category %></p>
+      </div>
+
+      <div class="beer-card-beer-icons d-flex flex-column align-items-start">
+        <p class="beer-card-ibu"><%= image_tag "hop.svg", alt: "hop", width: 20 %>: <%= beer.ibu ? beer.ibu : '?' %></p>
+
+        <% if  current_user %>
+          <% beer_tab = BeerTab.where({ beer_id: beer.id, user_id: current_user.id }).first %>
+          <%= beer_tab.nil? ? '⭐️: ?' : "⭐️: #{beer_tab.rating}" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
