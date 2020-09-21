@@ -8,6 +8,7 @@ require_relative './scrapers/scrape_dieu_du_ciel'
 require_relative './scrapers/scrape_farnham'
 require_relative './scrapers/scrape_trefle_noir'
 require_relative './scrapers/scrape_hermite'
+require_relative './scrapers/scrape_grimoire'
 require_relative './scrapers/upc_assign'
 
 # ______________________________________
@@ -41,7 +42,7 @@ Brewery.destroy_all
 puts "Loading all breweries..."
 load_breweries
 
-pp Brewery.all
+Brewery.all
 
 # ________________________________________
 # BEERS
@@ -77,8 +78,14 @@ puts "Done Trefle Noir 🍻"
 # ____________________________________________________
 # BEERS Hermite
 
-scrape_hermite
-puts "Done Hermite 🍻"
+# scrape_hermite
+# puts "Done Hermite 🍻"
+
+# ____________________________________________________
+# BEERS Hermite
+
+scrape_grimoire
+puts "Done Grimoire 🍻"
 
 # ___________________________________________________
 # UPCs assign
