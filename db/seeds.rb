@@ -84,8 +84,8 @@ puts "Done Trefle Noir 🍻"
 # ____________________________________________________
 # BEERS Hermite
 
-scrape_grimoire
-puts "Done Grimoire 🍻"
+# scrape_grimoire
+# puts "Done Grimoire 🍻"
 
 # ___________________________________________________
 # UPCs assign
