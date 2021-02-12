@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'beers/all/', to: 'beers#all', as: 'all'
       get 'beers/search/:query', to: 'beers#search', as: 'search'
+      get 'beers/:id', to: 'beers#show'
     end
   end
 
