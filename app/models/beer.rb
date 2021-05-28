@@ -9,7 +9,12 @@ class Beer < ActiveRecord::Base
   include PgSearch::Model
 
   pg_search_scope :global_search,
-    against: [ :name, :category ],
+    against: { 
+      category: 'A',
+      name: 'B',
+      short_desc: 'C',
+      long_desc: 'D'
+    },
     ignoring: :accents,
     associated_against: {
           brewery: [ :name ]
