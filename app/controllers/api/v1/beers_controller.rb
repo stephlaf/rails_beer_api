@@ -1,5 +1,5 @@
 class Api::V1::BeersController < Api::V1::BaseController
-  def all
+  def index
     @beers = Beer.all.includes(:brewery).order_by_name
   end
 
@@ -10,5 +10,21 @@ class Api::V1::BeersController < Api::V1::BaseController
   def show
     # raise
     @beer = Beer.find(params[:id])
+  end
+
+  def create
+    @beer = Beer.new(beer_params)
+    # authorize @restaurant
+    if @beer.save
+      render :show, status: :created
+    else
+      render_error
+    end
+  end
+
+  private
+
+  def beer_params
+    params.require(:beer).permit(:name, :brewery, :photo, :upc)
   end
 end

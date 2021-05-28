@@ -22,9 +22,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      get 'beers/all/', to: 'beers#all', as: 'all'
+      resources :beers, only: [:index, :show]
       get 'beers/search/:query', to: 'beers#search', as: 'search'
-      get 'beers/:id', to: 'beers#show'
+
+      resources :temp_beers, only: [:index, :create]
     end
   end
 
