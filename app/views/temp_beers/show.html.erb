@@ -1,2 +1,5 @@
 <h1>TempBeers#show</h1>
 <p>Find me in app/views/temp_beers/show.html.erb</p>
+
+<%= cl_image_tag @temp_beer.photo.key, alt: 'beer', width: 200, height: 200 %>
+<%= cl_image_tag @temp_beer.upc_photo.key, format: 'jpg', alt: 'upc', width: 200, height: 200 %>

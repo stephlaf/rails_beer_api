@@ -3,5 +3,5 @@ json.array! @temp_beers do |beer|
                       :name,
                       :brewery_name,
                       :photo,
-                      :upc
+                      :upc_photo
 end

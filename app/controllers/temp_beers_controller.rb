@@ -3,6 +3,7 @@ class TempBeersController < ApplicationController
   end
 
   def show
+    @temp_beer = TempBeer.find(params[:id])
   end
 
   def new

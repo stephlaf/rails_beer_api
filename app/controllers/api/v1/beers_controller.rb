@@ -8,13 +8,11 @@ class Api::V1::BeersController < Api::V1::BaseController
   end
 
   def show
-    # raise
     @beer = Beer.find(params[:id])
   end
 
   def create
     @beer = Beer.new(beer_params)
-    # authorize @restaurant
     if @beer.save
       render :show, status: :created
     else
