@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  
+
   root to: 'pages#home'
 
   get 'beers/new/:upc', to: 'beers#new_upc', as: 'new_upc'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :beers, only: [:index, :show]
+      resources :beers, only: [:index, :show, :create, :destroy]
       get 'beers/search/:query', to: 'beers#search', as: 'search'
 
       resources :temp_beers, only: [:index, :create]
