@@ -3,6 +3,11 @@ class Api::V1::TempBeersController < Api::V1::BaseController
     @temp_beers = TempBeer.all
   end
 
+  def show
+    @temp_beer = TempBeer.find(params[:id])
+    @beer = Beer.new()
+  end
+
   def create
     @temp_beer = TempBeer.new(temp_beer_params)
 
@@ -12,7 +17,7 @@ class Api::V1::TempBeersController < Api::V1::BaseController
     if @temp_beer.save
       render :create
     else
-      # JSON.stringify("Bad request")
+      render json: { status: 500, errors: @temp_beer.errors }
     end
   end
 

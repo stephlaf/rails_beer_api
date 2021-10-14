@@ -13,14 +13,23 @@ class Api::V1::BeersController < Api::V1::BaseController
 
   def create
     @beer = Beer.new(beer_params)
-    p beer_params[:brewery_id]
     @beer.brewery = Brewery.find(beer_params[:brewery_id].to_i)
     @beer.photo.attach(io: beer_params[:photo], filename: 'photo', content_type: 'image/png')
 
     if @beer.save
       render :show, status: :created
     else
-      render_error
+      render json: { status: 500, errors: @beer.errors }
+    end
+  end
+
+  def update
+    @beer = Beer.find(params[:id])
+
+    if @beer.update(beer_params)
+      render :show
+    else
+      render json: { status: 500, errors: @beer.errors }
     end
   end
 
@@ -28,6 +37,18 @@ class Api::V1::BeersController < Api::V1::BaseController
     @beer = Beer.find(params[:id])
     @beer.destroy
     render json: { message: "Beer with ID #{@beer.id} #{@beer.name} has been destroyed" }.to_json
+  end
+
+  def new_from_temp
+    # @temp_beer = TempBeer.find(params[:id])
+
+  end
+
+  # POST
+  def convert
+    p @beer = Beer.new(beer_params)
+    # render json: { message: "TempBeer with ID #{@temp_beer.id} has been converted" }.to_json
+    render json: @beer.to_json
   end
 
   private
